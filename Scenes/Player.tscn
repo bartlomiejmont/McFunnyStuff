@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/AdamFront.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/AdamPunch.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/AdamSide.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/AdamSideL.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/AdamSideR.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/AnimatedSprite.gd" type="Script" id=7]
+[ext_resource path="res://Sound/chodzenie1.wav" type="AudioStream" id=8]
+[ext_resource path="res://Scenes/AudioStreamPlayer.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "punch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 51.1577
+height = 116.702
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 465.609, 251.929 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "run"
+frame = 1
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.85733, 7.71637 )
+shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+script = ExtResource( 9 )
+
+[connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
+[connection signal="animate" from="." to="AnimatedSprite" method="_on_Player_animate"]

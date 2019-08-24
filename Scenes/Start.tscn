@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Start.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/BleedingPixels.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Sprites/button.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/buttonP.png" type="Texture" id=4]
+[ext_resource path="res://Sound/click.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Click.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 2 )
+
+[node name="Start" type="Node"]
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 246.0
+margin_right = 1280.0
+margin_bottom = 326.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 250.0
+margin_right = 1030.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.87451, 0.227451, 0.227451, 1 )
+text = "That's how it's done."
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 330.0
+margin_right = 1280.0
+margin_bottom = 410.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 640.0
+margin_right = 640.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.87451, 0.227451, 0.227451, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 414.0
+margin_right = 1280.0
+margin_bottom = 474.0
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 544.0
+margin_right = 736.0
+margin_bottom = 60.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/TextureButton" to="Click" method="_on_TextureButton_button_down"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]

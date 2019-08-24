@@ -15,8 +15,22 @@ _global_script_class_icons={
 
 [application]
 
-config/name="New Game Project"
+config/name="That's how it's done"
+run/main_scene="res://Scenes/Start.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/size/resizable=false
+window/stretch/aspect="keep"
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemys"
+2d_physics/layer_3="items"
 
 [rendering]
 

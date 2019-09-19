@@ -4,6 +4,7 @@ extends KinematicBody2D
 var motion = Vector2()
 const SPEED = 300
 signal animate
+signal layer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,7 @@ func _process(delta):
 	moveH()
 	animate()
 	move_and_slide(motion)
+	setLayer()
 
 func _physics_process(delta):
 	pass
@@ -54,4 +56,6 @@ func animate():
 #		$AnimatedSprite.play("run")
 #	else:
 #		$AnimatedSprite.play("idle")
-#
+
+func setLayer():
+	emit_signal("layer",int(position.y/10))

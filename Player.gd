@@ -43,19 +43,7 @@ func moveH():
 		motion.y = 0
 
 func animate():
-	
 	emit_signal("animate", motion)
-	
-#	if Input.is_key_pressed(KEY_SPACE):
-#		$AnimatedSprite.play("punch")
-#	elif motion.x > 0:
-#		$AnimatedSprite.flip_h = true
-#		$AnimatedSprite.play("run")
-#	elif motion.x < 0:
-#		$AnimatedSprite.flip_h = false 
-#		$AnimatedSprite.play("run")
-#	else:
-#		$AnimatedSprite.play("idle")
 
 func setLayer():
 	emit_signal("layer",int(position.y/10))

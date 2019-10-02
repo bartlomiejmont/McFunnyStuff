@@ -19,12 +19,20 @@ config/name="That's how it's done"
 run/main_scene="res://Scenes/Start.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "github-integration" )
 
 [layer_names]
 

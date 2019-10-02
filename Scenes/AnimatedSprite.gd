@@ -1,6 +1,8 @@
 extends AnimatedSprite
 
 signal punch
+signal runR
+signal runL
 var punching = false
 
 func _on_Player_animate(motion):
@@ -9,11 +11,13 @@ func _on_Player_animate(motion):
 			emit_signal("punch")
 			punching = true
 		elif motion.x > 0:
-			self.flip_h = true
-			self.play("run")
+			emit_signal("runR")
+#			self.flip_h = true
+#			self.play("run")
 		elif motion.x < 0:
-			self.flip_h = false 
-			self.play("run")
+			emit_signal("runL")
+#			self.flip_h = false 
+#			self.play("run")
 		elif motion.y != 0:
 			self.play("run")
 		else:

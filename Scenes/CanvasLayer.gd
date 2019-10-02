@@ -8,4 +8,4 @@ func _process(delta):
 	pass
 
 func _on_Player_layer(pos):
-	self.layer=pos
+	self.layer=pos+1

@@ -7,7 +7,7 @@ var punching = false
 
 func _on_Player_animate(motion):
 	if not punching:
-		if  Input.is_key_pressed(KEY_SPACE):
+		if  Input.is_action_just_pressed("punch"):
 			emit_signal("punch")
 			punching = true
 		elif motion.x > 0:

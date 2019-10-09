@@ -5,6 +5,7 @@ var motion = Vector2()
 const SPEED = 300
 signal animate
 signal layer
+signal hit
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,7 +24,7 @@ func _physics_process(delta):
 	pass
 
 func moveV():
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_just_pressed("punch"):
 		motion.x=0
 	elif Input.is_action_pressed("ui_right") && !Input.is_action_pressed("ui_left"):
 		motion.x=SPEED
@@ -33,7 +34,7 @@ func moveV():
 		motion.x = 0
 
 func moveH():
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_just_pressed("punch"):
 		motion.y=0
 	elif Input.is_action_pressed("ui_up") && !Input.is_action_pressed("ui_down"):
 		motion.y=-SPEED*0.6
@@ -47,3 +48,7 @@ func animate():
 
 func setLayer():
 	emit_signal("layer",int(position.y/10))
+
+
+func _on_RayCast2D_colision(zombie,dgr):
+	emit_signal("hit",zombie,dgr)

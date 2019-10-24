@@ -3,9 +3,10 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 var motion = Vector2()
 const SPEED = 300
+var screen_size=Vector2(OS.get_window_size().x,OS.get_window_size().y)
 signal animate
 signal layer
-signal hit
+signal hitZ
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,8 @@ func _ready():
 func _process(delta):
 	moveV()
 	moveH()
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 420, screen_size.y)
 	animate()
 	move_and_slide(motion)
 	setLayer()
@@ -51,4 +54,4 @@ func setLayer():
 
 
 func _on_RayCast2D_colision(zombie,dgr):
-	emit_signal("hit",zombie,dgr)
+	emit_signal("hitZ",zombie,dgr)

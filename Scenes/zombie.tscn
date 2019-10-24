@@ -55,4 +55,4 @@ custom_fonts/font = SubResource( 3 )
 text = "HP"
 script = ExtResource( 7 )
 
-[connection signal="animate" from="." to="Area2D/ZombieAnimation" method="_on_Zombie_animate"]
+[connection signal="animateZ" from="." to="Area2D/ZombieAnimation" method="_on_Zombie_animateZ"]

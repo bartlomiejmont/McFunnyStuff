@@ -59,5 +59,6 @@ func _on_RayCast2D_colision(zombie,dgr):
 
 
 func _on_PlayerInside_area_entered(area):
-	print(area)
+	$AnimationPlayer.play("Hit")
 	emit_signal("hitPlayer")
+

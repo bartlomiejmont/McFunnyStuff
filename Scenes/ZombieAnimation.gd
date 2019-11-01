@@ -1,9 +1,13 @@
 extends AnimatedSprite
 
+signal moveR
+signal moveL
 
 
 func _on_Zombie_animateZ(movingRight):
 	if  movingRight:
-		flip_h = true
+		emit_signal("moveR")
+#		flip_h = true
 	else:
-		flip_h = false
+		emit_signal("moveL")
+#		flip_h = false

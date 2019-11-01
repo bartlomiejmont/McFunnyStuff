@@ -7,6 +7,7 @@ var screen_size=Vector2(OS.get_window_size().x,OS.get_window_size().y)
 signal animate
 signal layer
 signal hitZ
+signal hitPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -55,3 +56,8 @@ func setLayer():
 
 func _on_RayCast2D_colision(zombie,dgr):
 	emit_signal("hitZ",zombie,dgr)
+
+
+func _on_PlayerInside_area_entered(area):
+	print(area)
+	emit_signal("hitPlayer")

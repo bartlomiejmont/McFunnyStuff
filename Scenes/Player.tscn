@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/AdamFront.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/AdamPunch.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/AdamSide.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/AdamSideL.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/AdamSideR.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/AdamSide.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/AdamSideL.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/AdamSideR.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/AdamPunch.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/AnimatedSprite.gd" type="Script" id=7]
 [ext_resource path="res://Sound/chodzenie1.wav" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/AudioStreamPlayer.gd" type="Script" id=9]
@@ -20,15 +20,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "punch",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "run",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "punch",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -141,8 +141,11 @@ tracks/2/keys = {
 "values": [ 270.0 ]
 }
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 23.8289
+
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 465.609, 251.929 )
+position = Vector2( 462.955, 255.91 )
 collision_mask = 2
 script = ExtResource( 1 )
 __meta__ = {
@@ -151,7 +154,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "run"
+animation = "punch"
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -182,6 +185,17 @@ stream = ExtResource( 12 )
 volume_db = -15.0
 pitch_scale = 0.8
 
+[node name="PlayerInside" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInside" groups=[
+"inside",
+]]
+position = Vector2( -1.99033, -7.29767 )
+shape = SubResource( 6 )
+
 [connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
 [connection signal="animate" from="." to="AnimatedSprite" method="_on_Player_animate"]
 [connection signal="punch" from="AnimatedSprite" to="RayCast2D" method="_on_AnimatedSprite_punch"]
@@ -190,3 +204,4 @@ pitch_scale = 0.8
 [connection signal="runR" from="AnimatedSprite" to="AnimationPlayer" method="_on_AnimatedSprite_runR"]
 [connection signal="colision" from="RayCast2D" to="." method="_on_RayCast2D_colision"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimatedSprite" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="PlayerInside" to="." method="_on_PlayerInside_area_entered"]

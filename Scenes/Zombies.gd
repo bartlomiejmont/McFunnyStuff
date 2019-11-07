@@ -15,7 +15,7 @@ func _on_Player_hitZ(z,dgr):
 	var blood = z.get_child(0)
 	var zAnim = z.get_child(4)
 	zAnim.Hit = true
-#	print("hit:", zombie)
+
 	if zombie.HP == 1:
 		emit_signal("addPoint")
 	zombie.HP-=1
@@ -39,7 +39,7 @@ func spawnZombie():
 	else:
 		enemy.get_child(0).position.x = 0
 	add_child(enemy)
-#	print("spawn:" , enemy)
+
 
 func _on_Timer_timeout():
 	spawnZombie()

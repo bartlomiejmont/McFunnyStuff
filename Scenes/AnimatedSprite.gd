@@ -26,7 +26,6 @@ func _on_Player_animate(motion):
 			self.play("idle")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print(playing)
 	if anim_name == "Punching":
 		punching = false
 	elif anim_name == "Hit":
@@ -35,6 +34,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Player_hitPlayer():
-#	$AnimationPlayer.stop()
 	hiting = true
 	emit_signal("hit")

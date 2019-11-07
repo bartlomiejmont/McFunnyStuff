@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/BG.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Sprites/light2.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Timer.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Level.gd" type="Script" id=11]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,8 +53,13 @@ wait_time = 3.0
 autostart = true
 script = ExtResource( 10 )
 
+[node name="Level" type="Timer" parent="."]
+autostart = true
+script = ExtResource( 11 )
+
 [connection signal="changeHP" from="." to="HUD" method="_on_Game_changeHP"]
 [connection signal="hitPlayer" from="CanvasLayer/Player" to="." method="_on_Player_hitPlayer"]
 [connection signal="hitZ" from="CanvasLayer/Player" to="Zombies" method="_on_Player_hitZ"]
 [connection signal="layer" from="CanvasLayer/Player" to="CanvasLayer" method="_on_Player_layer"]
 [connection signal="timeout" from="Timer" to="Zombies" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Level" to="." method="_on_Level_timeout"]

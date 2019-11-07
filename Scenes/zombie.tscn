@@ -158,7 +158,7 @@ shape = SubResource( 4 )
 
 [node name="ZombieAnimation" type="AnimatedSprite" parent="Area2D"]
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 6 )
 

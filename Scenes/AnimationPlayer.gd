@@ -13,3 +13,7 @@ func _on_AnimatedSprite_runL():
 
 func _on_AnimatedSprite_runR():
 	play("WalkingR")
+
+
+func _on_AnimatedSprite_hit():
+	play("Hit")

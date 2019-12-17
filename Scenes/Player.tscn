@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/AdamFront.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/AdamSide.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/AdamSideL.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/AdamSideR.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/AdamPunch.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/AdamPunch.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/AdamSide.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/AdamSideL.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/AdamSideR.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/AnimatedSprite.gd" type="Script" id=7]
 [ext_resource path="res://Sound/chodzenie1.wav" type="AudioStream" id=8]
 [ext_resource path="res://Scenes/AudioStreamPlayer.gd" type="Script" id=9]
@@ -13,6 +13,7 @@
 [ext_resource path="res://hit.tres" type="Animation" id=11]
 [ext_resource path="res://Scenes/AnimationPlayer.gd" type="Script" id=12]
 [ext_resource path="res://Sound/punch.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/AnimationTree.gd" type="Script" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,15 +22,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "run",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "punch",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -37,7 +38,22 @@ radius = 51.1577
 height = 116.702
 
 [sub_resource type="Animation" id=3]
-resource_name = "Punching"
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -64,8 +80,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "WalkingL"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -103,8 +118,7 @@ tracks/2/keys = {
 "values": [ 90.0002 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "WalkingR"
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -142,8 +156,69 @@ tracks/2/keys = {
 "values": [ 270.0 ]
 }
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=7]
 radius = 23.8289
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Hit"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Punching"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "WalkingL"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "WalkingR"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachine" id=21]
+states/Hit/node = SubResource( 8 )
+states/Hit/position = Vector2( 368, 44 )
+states/Idle/node = SubResource( 9 )
+states/Idle/position = Vector2( 368, 153 )
+states/Punching/node = SubResource( 10 )
+states/Punching/position = Vector2( 368, 260 )
+states/WalkingL/node = SubResource( 11 )
+states/WalkingL/position = Vector2( 195, 153 )
+states/WalkingR/node = SubResource( 12 )
+states/WalkingR/position = Vector2( 553, 153 )
+transitions = [ "Idle", "WalkingR", SubResource( 13 ), "WalkingR", "Idle", SubResource( 14 ), "Idle", "Hit", SubResource( 15 ), "Hit", "Idle", SubResource( 16 ), "Idle", "WalkingL", SubResource( 17 ), "WalkingL", "Idle", SubResource( 18 ), "Idle", "Punching", SubResource( 19 ), "Punching", "Idle", SubResource( 20 ), "WalkingL", "Hit", SubResource( 23 ), "WalkingR", "Hit", SubResource( 24 ), "WalkingL", "Punching", SubResource( 25 ), "WalkingR", "Punching", SubResource( 26 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 463.619, 255.91 )
@@ -156,6 +231,8 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle"
+playing = true
+flip_h = true
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -168,7 +245,7 @@ volume_db = -15.0
 script = ExtResource( 9 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-rotation = 1.5708
+rotation = 4.71239
 enabled = true
 cast_to = Vector2( 0, 80 )
 collision_mask = 2
@@ -177,9 +254,10 @@ script = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Hit = ExtResource( 11 )
-anims/Punching = SubResource( 3 )
-anims/WalkingL = SubResource( 4 )
-anims/WalkingR = SubResource( 5 )
+anims/Idle = SubResource( 3 )
+anims/Punching = SubResource( 4 )
+anims/WalkingL = SubResource( 5 )
+anims/WalkingR = SubResource( 6 )
 script = ExtResource( 12 )
 
 [node name="PunchSound" type="AudioStreamPlayer" parent="."]
@@ -196,16 +274,24 @@ collision_mask = 8
 "inside",
 ]]
 position = Vector2( -1.99033, -7.29767 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 21 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 22 )
+script = ExtResource( 14 )
 
 [connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
 [connection signal="animate" from="." to="AnimatedSprite" method="_on_Player_animate"]
 [connection signal="hitPlayer" from="." to="AnimatedSprite" method="_on_Player_hitPlayer"]
-[connection signal="hit" from="AnimatedSprite" to="AnimationPlayer" method="_on_AnimatedSprite_hit"]
+[connection signal="hit" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_hit"]
+[connection signal="punch" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_punch"]
 [connection signal="punch" from="AnimatedSprite" to="RayCast2D" method="_on_AnimatedSprite_punch"]
-[connection signal="punch" from="AnimatedSprite" to="AnimationPlayer" method="_on_AnimatedSprite_punch"]
-[connection signal="runL" from="AnimatedSprite" to="AnimationPlayer" method="_on_AnimatedSprite_runL"]
-[connection signal="runR" from="AnimatedSprite" to="AnimationPlayer" method="_on_AnimatedSprite_runR"]
+[connection signal="runL" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_runL"]
+[connection signal="runR" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_runR"]
 [connection signal="colision" from="RayCast2D" to="." method="_on_RayCast2D_colision"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimatedSprite" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="PlayerInside" to="." method="_on_PlayerInside_area_entered"]
+[connection signal="tree_exited" from="AnimationTree" to="AnimationTree" method="_on_AnimationTree_tree_exited"]

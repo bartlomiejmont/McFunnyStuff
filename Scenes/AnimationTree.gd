@@ -9,12 +9,10 @@ func _ready():
 
 func _on_AnimatedSprite_hit():
 	animTree.travel("Hit")
-	print("Hit")
 
 
 func _on_AnimatedSprite_punch():
 	animTree.travel("Punching")
-	print("punch")
 
 
 func _on_AnimatedSprite_runL():

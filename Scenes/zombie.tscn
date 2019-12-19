@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/zombie.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Blood.gd" type="Script" id=2]
@@ -6,9 +6,7 @@
 [ext_resource path="res://Sprites/Enemy/enemyL.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Enemy/enemyR.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/ZombieAnimation.gd" type="Script" id=6]
-[ext_resource path="res://Fonts/BleedingPixels.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Scenes/ZombieHP.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/ZombiePlayer.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/ZombiePlayer.gd" type="Script" id=7]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0, 0, 1, 0.803922, 0.309804, 0.309804, 0.270588 )
@@ -41,13 +39,7 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[sub_resource type="DynamicFont" id=6]
-size = 32
-outline_size = 1
-outline_color = Color( 1, 0.388235, 0.388235, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 resource_name = "Hit"
 length = 0.5
 step = 0.05
@@ -130,7 +122,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=9]
 radius = 22.8728
 
 [node name="Zombie" type="CanvasLayer"]
@@ -158,24 +150,15 @@ shape = SubResource( 4 )
 
 [node name="ZombieAnimation" type="AnimatedSprite" parent="Area2D"]
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
 script = ExtResource( 6 )
 
-[node name="ZombieHP" type="Label" parent="Area2D"]
-margin_left = -8.27136
-margin_top = -145.057
-margin_right = 33.7286
-margin_bottom = -113.057
-custom_fonts/font = SubResource( 6 )
-text = "HP"
-script = ExtResource( 8 )
-
 [node name="ZombiePlayer" type="AnimationPlayer" parent="Area2D"]
-anims/Hit = SubResource( 9 )
+anims/Hit = SubResource( 6 )
 anims/moveL = SubResource( 7 )
 anims/moveR = SubResource( 8 )
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 
 [node name="ZombieInside" type="Area2D" parent="Area2D" groups=[
 "inside",
@@ -190,7 +173,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/ZombieInside"]
 position = Vector2( 7.16248, 8.96851 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [connection signal="animateZ" from="." to="Area2D/ZombieAnimation" method="_on_Zombie_animateZ"]
 [connection signal="moveL" from="Area2D/ZombieAnimation" to="Area2D/ZombiePlayer" method="_on_ZombieAnimation_moveL"]

@@ -1,9 +1,8 @@
 extends CanvasLayer
 
 onready var zb=get_node("Area2D")
-onready var HpText=get_node("Area2D/ZombieHP")
 onready var Player = get_node("../../CanvasLayer/Player")
-var HP 
+var HP = 3
 var SPEED = 150
 var motion = Vector2()
 var screen_size=Vector2(OS.get_window_size().x,OS.get_window_size().y)
@@ -15,8 +14,8 @@ signal animateZ
 
 func _ready():
 	self.layer=1
-	HP=3
-	HpText.text=str(HP)
+
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,7 +26,7 @@ func _process(delta):
 	if HP<=0:
 		queue_free()
 	layer = zb.position.y/10-1
-	HpText.text=str(HP)
+
 
 func move():
 	if not isHit:
@@ -47,4 +46,4 @@ func move():
 			motion = motion.normalized() * SPEED
 
 func _on_Zombies_slowDown():
-	SPEED =  SPEED/2
+	SPEED =  SPEED - 20

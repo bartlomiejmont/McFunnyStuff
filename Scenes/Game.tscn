@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/BG.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Timer.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Level.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/BScaleTimer.gd" type="Script" id=12]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -57,9 +58,16 @@ script = ExtResource( 10 )
 autostart = true
 script = ExtResource( 11 )
 
+[node name="BScaleTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource( 12 )
+
 [connection signal="changeHP" from="." to="HUD" method="_on_Game_changeHP"]
+[connection signal="changePoints" from="." to="HUD" method="_on_Game_changePoints"]
 [connection signal="hitPlayer" from="CanvasLayer/Player" to="." method="_on_Player_hitPlayer"]
 [connection signal="hitZ" from="CanvasLayer/Player" to="Zombies" method="_on_Player_hitZ"]
 [connection signal="layer" from="CanvasLayer/Player" to="CanvasLayer" method="_on_Player_layer"]
+[connection signal="addPoint" from="Zombies" to="." method="_on_Zombies_addPoint"]
 [connection signal="timeout" from="Timer" to="Zombies" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Level" to="." method="_on_Level_timeout"]
+[connection signal="timeout" from="BScaleTimer" to="." method="_on_BScaleTimer_timeout"]

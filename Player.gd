@@ -63,3 +63,6 @@ func _on_PlayerInside_area_entered(area):
 	if  not Input.is_action_just_pressed("punch"):
 		emit_signal("hitPlayer")
 
+
+func _on_BScaleTimer_timeout():
+	pass # Replace with function body.

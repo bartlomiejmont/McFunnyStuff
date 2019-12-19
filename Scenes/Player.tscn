@@ -196,15 +196,15 @@ priority = 2
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-
-[sub_resource type="AnimationNodeStateMachine" id=21]
+[sub_resource type="AnimationNodeStateMachine" id=25]
 states/Hit/node = SubResource( 8 )
 states/Hit/position = Vector2( 368, 44 )
 states/Idle/node = SubResource( 9 )
@@ -215,10 +215,10 @@ states/WalkingL/node = SubResource( 11 )
 states/WalkingL/position = Vector2( 195, 153 )
 states/WalkingR/node = SubResource( 12 )
 states/WalkingR/position = Vector2( 553, 153 )
-transitions = [ "Idle", "WalkingR", SubResource( 13 ), "WalkingR", "Idle", SubResource( 14 ), "Idle", "Hit", SubResource( 15 ), "Hit", "Idle", SubResource( 16 ), "Idle", "WalkingL", SubResource( 17 ), "WalkingL", "Idle", SubResource( 18 ), "Idle", "Punching", SubResource( 19 ), "Punching", "Idle", SubResource( 20 ), "WalkingL", "Hit", SubResource( 23 ), "WalkingR", "Hit", SubResource( 24 ), "WalkingL", "Punching", SubResource( 25 ), "WalkingR", "Punching", SubResource( 26 ) ]
+transitions = [ "Idle", "WalkingR", SubResource( 13 ), "WalkingR", "Idle", SubResource( 14 ), "Idle", "Hit", SubResource( 15 ), "Hit", "Idle", SubResource( 16 ), "Idle", "WalkingL", SubResource( 17 ), "WalkingL", "Idle", SubResource( 18 ), "Idle", "Punching", SubResource( 19 ), "Punching", "Idle", SubResource( 20 ), "WalkingL", "Hit", SubResource( 21 ), "WalkingR", "Hit", SubResource( 22 ), "WalkingL", "Punching", SubResource( 23 ), "WalkingR", "Punching", SubResource( 24 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 463.619, 255.91 )
@@ -277,18 +277,18 @@ position = Vector2( -1.99033, -7.29767 )
 shape = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 21 )
+tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 22 )
+parameters/playback = SubResource( 26 )
 script = ExtResource( 14 )
 
-[connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
 [connection signal="animate" from="." to="AnimatedSprite" method="_on_Player_animate"]
+[connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
 [connection signal="hitPlayer" from="." to="AnimatedSprite" method="_on_Player_hitPlayer"]
 [connection signal="hit" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_hit"]
-[connection signal="punch" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_punch"]
 [connection signal="punch" from="AnimatedSprite" to="RayCast2D" method="_on_AnimatedSprite_punch"]
+[connection signal="punch" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_punch"]
 [connection signal="runL" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_runL"]
 [connection signal="runR" from="AnimatedSprite" to="AnimationTree" method="_on_AnimatedSprite_runR"]
 [connection signal="colision" from="RayCast2D" to="." method="_on_RayCast2D_colision"]

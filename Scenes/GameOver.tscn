@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/BleedingPixels.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/EndGameText.gd" type="Script" id=3]
+[ext_resource path="res://Sound/gameOverSoundOfSilence.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
 outline_size = 4
-outline_color = Color( 1, 0, 0, 1 )
+outline_color = Color( 0.678431, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
 outline_size = 3
-outline_color = Color( 1, 0, 0, 1 )
+outline_color = Color( 0.678431, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+outline_size = 2
+outline_color = Color( 0.678431, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="GameOver" type="CanvasLayer"]
 layer = 101
@@ -29,9 +38,9 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 262.0
+margin_top = 162.0
 margin_right = 1280.0
-margin_bottom = 390.0
+margin_bottom = 290.0
 alignment = 1
 
 [node name="GameOver" type="Label" parent="VBoxContainer/HBoxContainer"]
@@ -42,9 +51,9 @@ custom_fonts/font = SubResource( 1 )
 text = "Game Over"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 394.0
+margin_top = 294.0
 margin_right = 1280.0
-margin_bottom = 458.0
+margin_bottom = 358.0
 alignment = 1
 
 [node name="Score" type="Label" parent="VBoxContainer/HBoxContainer2"]
@@ -53,4 +62,46 @@ margin_right = 836.0
 margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 text = "Your Score: "
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 362.0
+margin_right = 1280.0
+margin_bottom = 426.0
+alignment = 1
+
+[node name="Score" type="Label" parent="VBoxContainer/HBoxContainer4"]
+margin_left = 640.0
+margin_right = 640.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 430.0
+margin_right = 1280.0
+margin_bottom = 490.0
+alignment = 1
+
+[node name="EndGameText" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 520.0
+margin_right = 760.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 3 )
+text = "Minuta ciszy "
+script = ExtResource( 3 )
+
+[node name="EndSong" type="AudioStreamPlayer" parent="VBoxContainer/HBoxContainer3"]
+stream = ExtResource( 4 )
+autoplay = true
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 494.0
+margin_right = 1280.0
+margin_bottom = 558.0
+alignment = 1
+
+[node name="Score" type="Label" parent="VBoxContainer/HBoxContainer5"]
+margin_left = 640.0
+margin_right = 640.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
 

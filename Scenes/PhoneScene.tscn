@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/PhoneScene.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/phone.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scenes/number.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Button.gd" type="Script" id=5]
+[ext_resource path="res://Sound/pip2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sound/pip1.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sound/phone.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sound/dead.wav" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -58,6 +62,21 @@ margin_top = 528.298
 margin_right = 620.436
 margin_bottom = 548.298
 rect_scale = Vector2( 5.303, 3.22725 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource( 6 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource( 7 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource( 7 )
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource( 8 )
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource( 9 )
 
 [connection signal="pressed" from="Phone/Button" to="Phone/number" method="_on_Button_pressed"]
 [connection signal="pressed" from="Phone/Button" to="Phone/Button" method="_on_Button_pressed"]

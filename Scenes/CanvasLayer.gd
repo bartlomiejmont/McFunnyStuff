@@ -9,3 +9,4 @@ func _process(delta):
 
 func _on_Player_layer(pos):
 	self.layer=pos+1
+

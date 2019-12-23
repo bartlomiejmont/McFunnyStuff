@@ -2,11 +2,13 @@ extends Node2D
 
 signal changeHP
 signal changePoints
+signal phone
 
 var PlayerHP = 0
 var Level = 1
 var timer = 1
 var points = 0
+var pause = false
 
 var zombies
 var zombieTimer
@@ -18,11 +20,13 @@ func _ready():
 	zombies = $Zombies
 	zombieTimer = $Timer
 
-
-
 func _on_Player_hitPlayer():
 	PlayerHP +=1
 	emit_signal("changeHP",PlayerHP)
+
+func _process(delta):
+	if PlayerHP > 10:
+		emit_signal("phone",points)
 
 
 func _on_Level_timeout():
@@ -43,7 +47,6 @@ func _on_Level_timeout():
 	elif timer >= 16:
 		zombies.zombieHP = 4 
 		zombies.zombieSPEED = 170 
-	print(timer)
 
 func _on_BScaleTimer_timeout():
 	PlayerHP+=0.1
@@ -52,6 +55,7 @@ func _on_BScaleTimer_timeout():
 
 func _on_Zombies_addPoint():
 	points+=1
-	PlayerHP-=0.3
+	if PlayerHP > 0:
+		PlayerHP-=0.3
 	emit_signal("changeHP",PlayerHP)
 	emit_signal("changePoints",points)

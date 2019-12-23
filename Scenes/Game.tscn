@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/BG.png" type="Texture" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://Scenes/Timer.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Level.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/BScaleTimer.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Pause.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Pause.gd" type="Script" id=14]
+[ext_resource path="res://Sound/main2.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/mainSong.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/PhoneScene.tscn" type="PackedScene" id=17]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -62,8 +67,26 @@ script = ExtResource( 11 )
 autostart = true
 script = ExtResource( 12 )
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Pause" parent="CanvasLayer2" instance=ExtResource( 13 )]
+pause_mode = 2
+visible = false
+script = ExtResource( 14 )
+
+[node name="mainSong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -10.0
+autoplay = true
+script = ExtResource( 16 )
+
+[node name="phoneScene" parent="." instance=ExtResource( 17 )]
+layer = 95
+
 [connection signal="changeHP" from="." to="HUD" method="_on_Game_changeHP"]
 [connection signal="changePoints" from="." to="HUD" method="_on_Game_changePoints"]
+[connection signal="phone" from="." to="phoneScene" method="_on_Game_phone"]
 [connection signal="hitPlayer" from="CanvasLayer/Player" to="." method="_on_Player_hitPlayer"]
 [connection signal="hitZ" from="CanvasLayer/Player" to="Zombies" method="_on_Player_hitZ"]
 [connection signal="layer" from="CanvasLayer/Player" to="CanvasLayer" method="_on_Player_layer"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/zombie.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Blood.gd" type="Script" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://Sprites/Enemy/enemyR.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/ZombieAnimation.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/ZombiePlayer.gd" type="Script" id=7]
+[ext_resource path="res://Sound/zombieGroan1.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sound/zombieGroan2.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sound/zombieGroan3.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sound/zombieGroan4.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/groanTimer.gd" type="Script" id=12]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0, 0, 1, 0.803922, 0.309804, 0.309804, 0.270588 )
@@ -150,7 +155,6 @@ shape = SubResource( 4 )
 
 [node name="ZombieAnimation" type="AnimatedSprite" parent="Area2D"]
 frames = SubResource( 5 )
-frame = 3
 playing = true
 script = ExtResource( 6 )
 
@@ -174,6 +178,25 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/ZombieInside"]
 position = Vector2( 7.16248, 8.96851 )
 shape = SubResource( 9 )
+
+[node name="groan1" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 8 )
+volume_db = -10.73
+
+[node name="groan2" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 9 )
+volume_db = -10.73
+
+[node name="groan3" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 10 )
+volume_db = -10.73
+
+[node name="groan4" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 11 )
+volume_db = -10.73
+
+[node name="groanTimer" type="Timer" parent="Area2D"]
+script = ExtResource( 12 )
 
 [connection signal="animateZ" from="." to="Area2D/ZombieAnimation" method="_on_Zombie_animateZ"]
 [connection signal="moveL" from="Area2D/ZombieAnimation" to="Area2D/ZombiePlayer" method="_on_ZombieAnimation_moveL"]

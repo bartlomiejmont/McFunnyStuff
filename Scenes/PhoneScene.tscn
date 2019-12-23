@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/PhoneScene.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/phone.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/advanced_pixel-7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scenes/number.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Button.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+extra_spacing_char = 15
+extra_spacing_space = 20
+font_data = ExtResource( 3 )
+
+[node name="phoneScene" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Phone" type="Node2D" parent="."]
+pause_mode = 2
+visible = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Phone"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 32.0093, 17.9246 )
+color = Color( 0, 0, 0, 0.54902 )
+
+[node name="Sprite" type="Sprite" parent="Phone"]
+position = Vector2( 640, 360 )
+texture = ExtResource( 2 )
+
+[node name="number" type="Label" parent="Phone"]
+margin_left = 600.127
+margin_top = 129.949
+margin_right = 690.127
+margin_bottom = 189.949
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "911"
+script = ExtResource( 4 )
+
+[node name="Button" type="Button" parent="Phone"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 531.227
+margin_top = 199.706
+margin_right = 543.227
+margin_bottom = 219.706
+rect_scale = Vector2( 17.5615, 15.5598 )
+script = ExtResource( 5 )
+
+[node name="Button2" type="Button" parent="Phone"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 608.436
+margin_top = 528.298
+margin_right = 620.436
+margin_bottom = 548.298
+rect_scale = Vector2( 5.303, 3.22725 )
+
+[connection signal="pressed" from="Phone/Button" to="Phone/number" method="_on_Button_pressed"]
+[connection signal="pressed" from="Phone/Button" to="Phone/Button" method="_on_Button_pressed"]
+[connection signal="pressed" from="Phone/Button2" to="." method="_on_Button2_pressed"]

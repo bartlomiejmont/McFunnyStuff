@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/zombieGroan3.wav-b7800018742f0558015483127a2e1a37.sample"
+
+[deps]
+
+source_file="res://Sound/zombieGroan3.wav"
+dest_files=[ "res://.import/zombieGroan3.wav-b7800018742f0558015483127a2e1a37.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

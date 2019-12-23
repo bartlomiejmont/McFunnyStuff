@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/AdamFront.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Scenes/AnimationPlayer.gd" type="Script" id=12]
 [ext_resource path="res://Sound/punch.wav" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/AnimationTree.gd" type="Script" id=14]
+[ext_resource path="res://Sound/ugh.wav" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/ough.gd" type="Script" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -217,6 +219,7 @@ states/WalkingR/node = SubResource( 12 )
 states/WalkingR/position = Vector2( 553, 153 )
 transitions = [ "Idle", "WalkingR", SubResource( 13 ), "WalkingR", "Idle", SubResource( 14 ), "Idle", "Hit", SubResource( 15 ), "Hit", "Idle", SubResource( 16 ), "Idle", "WalkingL", SubResource( 17 ), "WalkingL", "Idle", SubResource( 18 ), "Idle", "Punching", SubResource( 19 ), "Punching", "Idle", SubResource( 20 ), "WalkingL", "Hit", SubResource( 21 ), "WalkingR", "Hit", SubResource( 22 ), "WalkingL", "Punching", SubResource( 23 ), "WalkingR", "Punching", SubResource( 24 ) ]
 start_node = "Idle"
+graph_offset = Vector2( 0, 51.648 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
@@ -224,9 +227,6 @@ start_node = "Idle"
 position = Vector2( 463.619, 255.91 )
 collision_mask = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
@@ -283,6 +283,11 @@ active = true
 parameters/playback = SubResource( 26 )
 script = ExtResource( 14 )
 
+[node name="ough" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+pitch_scale = 1.2
+script = ExtResource( 16 )
+
 [connection signal="animate" from="." to="AnimatedSprite" method="_on_Player_animate"]
 [connection signal="animate" from="." to="AudioStreamPlayer" method="_on_Player_animate"]
 [connection signal="hitPlayer" from="." to="AnimatedSprite" method="_on_Player_hitPlayer"]
@@ -295,3 +300,4 @@ script = ExtResource( 14 )
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimatedSprite" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="PlayerInside" to="." method="_on_PlayerInside_area_entered"]
 [connection signal="tree_exited" from="AnimationTree" to="AnimationTree" method="_on_AnimationTree_tree_exited"]
+[connection signal="finished" from="ough" to="ough" method="_on_ough_finished"]

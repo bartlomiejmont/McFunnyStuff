@@ -9,14 +9,16 @@
 [ext_resource path="res://Sprites/HBInside-export.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/TextureProgress.gd" type="Script" id=8]
 
-[sub_resource type="DynamicFont" id=2]
-size = 64
-outline_size = 1
-font_data = ExtResource( 2 )
-
 [sub_resource type="DynamicFont" id=1]
 size = 64
-outline_size = 1
+outline_size = 2
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+outline_size = 2
+outline_color = Color( 1, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [node name="HUD" type="Node2D"]
@@ -44,8 +46,8 @@ margin_bottom = 128.0
 margin_top = 32.0
 margin_right = 72.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.411765, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "23"
 script = ExtResource( 3 )
 
@@ -60,8 +62,8 @@ margin_left = 520.0
 margin_top = 32.0
 margin_right = 620.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.411765, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "HP:"
 align = 2
 uppercase = true

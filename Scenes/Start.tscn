@@ -1,101 +1,114 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Start.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/BleedingPixels.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Sprites/button.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/buttonP.png" type="Texture" id=4]
-[ext_resource path="res://Sound/click.wav" type="AudioStream" id=5]
-[ext_resource path="res://Scenes/Click.gd" type="Script" id=6]
+[ext_resource path="res://Sound/click.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/Click.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/BleedingPixels.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/button.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/buttonP.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Label3.gd" type="Script" id=7]
+[ext_resource path="res://Sound/keybordClicking.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
-outline_size = 1
-font_data = ExtResource( 2 )
+outline_size = 3
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
+size = 32
+outline_size = 2
+outline_color = Color( 0.764706, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Start" type="Node"]
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1.58667
-margin_right = 1.58667
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1277.0
+margin_bottom = 732.0
+rect_scale = Vector2( 1, 0.96 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 1277.0
+margin_bottom = 732.0
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 194.0
-margin_right = 1280.0
-margin_bottom = 274.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 192.0
+margin_right = 1277.0
+margin_bottom = 272.0
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 250.0
-margin_right = 1030.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 248.0
+margin_right = 1028.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.87451, 0.227451, 0.227451, 1 )
+custom_colors/font_color = Color( 0.239216, 0, 0, 1 )
 text = "That's how it's done."
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 278.0
-margin_right = 1280.0
-margin_bottom = 358.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 276.0
+margin_right = 1277.0
+margin_bottom = 356.0
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
-margin_left = 640.0
-margin_right = 640.0
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 638.0
+margin_right = 638.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.227451, 0.227451, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 362.0
-margin_right = 1280.0
-margin_bottom = 422.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 360.0
+margin_right = 1277.0
+margin_bottom = 420.0
 alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 544.0
-margin_right = 736.0
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 542.0
+margin_right = 734.0
 margin_bottom = 60.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 426.0
-margin_right = 1280.0
-margin_bottom = 506.0
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 424.0
+margin_right = 1277.0
+margin_bottom = 504.0
 alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer4"]
-margin_left = 640.0
-margin_right = 640.0
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 638.0
+margin_right = 638.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.227451, 0.227451, 1 )
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 510.0
-margin_right = 1280.0
-margin_bottom = 526.0
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 508.0
+margin_right = 1277.0
+margin_bottom = 540.0
 alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer5"]
-margin_left = 601.0
-margin_right = 678.0
-margin_bottom = 16.0
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 566.0
+margin_right = 710.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.843137, 0.117647, 0.0627451, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-text = "W swiecei "
+custom_colors/font_color = Color( 0.239216, 0, 0, 1 )
+text = "W swiecie"
+script = ExtResource( 7 )
 
-[node name="Click" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-script = ExtResource( 6 )
+[node name="keybord" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 
-[connection signal="button_down" from="VBoxContainer/HBoxContainer/TextureButton" to="Click" method="_on_TextureButton_button_down"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/TextureButton" to="Click" method="_on_TextureButton_button_down"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/TextureButton" to="MarginContainer/VBoxContainer/HBoxContainer5/Label3" method="_on_TextureButton_pressed"]
